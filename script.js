@@ -1,15 +1,23 @@
-// your code here
-function concatText(){
-	name = document.getElementById("name").value
-	year = document.getElementById("year").value
-	url= document.getElementById("url")
-	if(name && year){
-		url.innerHTML =`https://localhost:8080/?${name}&${year}`
-	}
-	else if(name && !year){
-		url.innerHTML =`https://localhost:8080/?${name}`
-	}
-	else if(!name && year){
-		url.innerHTML =`https://localhost:8080/?${year}`
-	}
+var form = document.querySelector("form");
+var h3 = document.querySelector("h3");
+var nameELement = document.querySelector("#name");
+var yearElement = document.querySelector("#year");
+var btn = document.querySelector("#button");
+
+function handleSubmit(event) {
+  event.preventDefault();
+  var h3Value = "https://localhost:8080/";
+  var name = nameELement.value;
+  var year = yearElement.value;
+
+  if (name && year) {
+    h3Value += "?name=" + name + "&year=" + year;
+  } else if (name && !year) {
+    h3Value += "?name=" + name;
+  } else if (!name && year) {
+    h3Value += "?year=" + year;
+  }
+  h3.textContent = h3Value;
 }
+
+form.addEventListener("submit", handleSubmit);
